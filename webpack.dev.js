@@ -30,7 +30,10 @@ module.exports = {
           options: { name: "name.[hash].[ext]", outputPath: "imgs" },
         },
       },
-      { test: /\.scss$/, use: ["style-loader", "css-loader", "sass-loader"] },
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
     ],
   },
   plugins: [
