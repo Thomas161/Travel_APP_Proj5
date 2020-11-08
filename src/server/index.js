@@ -1,16 +1,13 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-// console.log("API Key", process.env.API_KEY);
-// console.log("PORT", process.env.PORT);
+const api = process.env.API_GEONAMES;
+console.log("API", api);
 
-// const API_Key = process.env.API_KEY;
 const path = require("path");
 const fetch = require("node-fetch");
 const express = require("express");
 const app = express();
-
-// const URL = "https://api.meaningcloud.com/sentiment-2.1?key=";
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.text());
@@ -21,11 +18,7 @@ app.use(cors());
 app.use(express.static("dist"));
 
 app.get("/", (req, res) => {
-  res.sendFile("dist/index.html");
-});
-
-app.get("/test", (req, res) => {
-  res.send(mockAPIResponse);
+  res.sendFile(__dirname + "dist/index.html");
 });
 
 // app.post("/document", async (req, res) => {
