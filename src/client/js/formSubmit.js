@@ -1,21 +1,33 @@
 const fetch = require("node-fetch");
-const formSubmit = (e) => {
-  e.preventDefault();
-  let base = process.env.API_GEONAMES_BASE_URL;
-  let user = process.env.API_GEONAMES_USERNAME;
-  console.log(base + user);
-  fetch(`${base}${user}`)
-    .then((res) => res.text())
-    .then((data) => {
-      console.log(data);
-      updateHTML(data);
-    })
-    .catch((e) => console.log("error ==>", e));
 
-  //   console.log("api returned in form => ", api);
+const getTripInformation = async (url, data) => {
+  const request = await fetch(url, {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  try {
+    const data = await request.text().then(console.log(data));
+    return data;
+  } catch (error) {
+    console.log("Error", error);
+  }
 };
-const updateHTML = (data) => {
+export const formSubmit = async (e) => {
+  e.preventDefault();
+
+  let city = document.getElementById("city").value;
+
+  const data = {
+    city: city,
+  };
+  const trip = await getTripInformation("http://localhost:8080/document", data);
+  console.log(trip); //undefined
   let d = document.getElementById("demo");
-  d.innerHTML = data.toponymName;
+  d.innerHTML = trip;
+  console.log("Object : ", typeof trip);
 };
-export { formSubmit, updateHTML };

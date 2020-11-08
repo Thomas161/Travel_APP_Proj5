@@ -3,13 +3,9 @@ const fetch = require("node-fetch");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const api = process.env.API_GEONAMES_BASE_URL;
-const user = process.env.API_GEONAMES_USERNAME;
-
-fetch(`${api}${user}`)
-  .then((res) => res.json())
-  .then((data) => console.log(data))
-  .catch((e) => console.log("Errors found ", e));
+const base = process.env.API_GEONAMES_BASE_URL;
+const userName = process.env.API_GEONAMES_USERNAME;
+let trip = {};
 
 const express = require("express");
 const app = express();
@@ -25,18 +21,23 @@ app.use(express.static("dist"));
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "dist/index.html");
 });
-
-// app.post("/document", async (req, res) => {
-//   const resp = await fetch(`${URL}${API_Key}&lang=en&url=${req.body}`);
-//   try {
-//     const data = await resp.json();
-//     console.log(data);
-//     res.send(data);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
-
 app.listen(8080, () => {
   console.log(`Listening on 8080`);
+});
+const getCityDetail = async (city, user) => {
+  const request = await fetch(`${base}q=${city}&username=${user}`);
+  const res = await request.json();
+
+  trip.city = res.geonames[0].name;
+};
+
+app.post("/document", async (req, res) => {
+  trip = {};
+  try {
+    const city = req.body.city;
+    await getCityDetail(city, userName);
+    res.json();
+  } catch (error) {
+    res.send(status);
+  }
 });

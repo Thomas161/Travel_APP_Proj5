@@ -11,19 +11,40 @@
       </div>
       <div class="vert second">
         <section>
-          <form onsubmit="return Client.formSubmit(e)">
-            <input type="text" id="url" placeholder="City" />
-            <br />
-          
+          <form
+            class="trip_info_form"
+            onsubmit="return Client.formSubmit(event)"
+          >
             <input
-              type="submit"
-              id="submit"
-              onclick="return Client.formSubmit(e)"
-              onsubmit="return Client.formSubmit(e)"
+              class="trip_info_input input_search"
+              type="search"
+              id="city"
+              placeholder="City??"
+              required
             />
+            <label
+              >Depart date
+              <input
+                class="trip_info_input input_date"
+                type="date"
+                id="depart_date"
+                name="trip-start"
+                min="2021-01-01"
+                max="2035-12-31"
+                value="2020-12-01"
+              />
+            </label>
+            <input
+              class="trip_info_input input_submit"
+              type="submit"
+              value="Search"
+            />
+          </form>
         </section>
       </div>
-      <div class="vert third"><section><div id="demo"></div></section></div>
+      <div class="vert third">
+        <section><div id="demo"></div></section>
+      </div>
       <div class="vert fourth"><section></section></div>
     </div>
     <script>
