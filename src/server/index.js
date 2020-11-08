@@ -1,11 +1,16 @@
+const path = require("path");
+const fetch = require("node-fetch");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const api = process.env.API_GEONAMES;
-console.log("API", api);
+const api = process.env.API_GEONAMES_BASE_URL;
+const user = process.env.API_GEONAMES_USERNAME;
 
-const path = require("path");
-const fetch = require("node-fetch");
+fetch(`${api}${user}`)
+  .then((res) => res.json())
+  .then((data) => console.log(data))
+  .catch((e) => console.log("Errors found ", e));
+
 const express = require("express");
 const app = express();
 

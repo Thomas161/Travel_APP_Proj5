@@ -10,9 +10,20 @@
         <img id="travelImg" src="../assets/travel.jpg" alt="no_travel" />
       </div>
       <div class="vert second">
-        <section>Hello</section>
+        <section>
+          <form onsubmit="return Client.formSubmit(e)">
+            <input type="text" id="url" placeholder="City" />
+            <br />
+          
+            <input
+              type="submit"
+              id="submit"
+              onclick="return Client.formSubmit(e)"
+              onsubmit="return Client.formSubmit(e)"
+            />
+        </section>
       </div>
-      <div class="vert third"><section></section></div>
+      <div class="vert third"><section><div id="demo"></div></section></div>
       <div class="vert fourth"><section></section></div>
     </div>
     <script>

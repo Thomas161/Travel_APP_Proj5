@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Thomas161/Travel_APP_Proj5#readme",
   "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
