@@ -18,26 +18,36 @@ app.use(cors());
 
 app.use(express.static("dist"));
 
+app.use(express.json({ limit: "1mb" }));
+
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "dist/index.html");
 });
-app.listen(8080, () => {
-  console.log(`Listening on 8080`);
-});
+
+// fetch(`${base}q=london&username=${userName}`)
+//   .then((res) => res.json())
+//   .then((data) => console.log(data))
+//   .catch((e) => console.log(e));
+
 const getCityDetail = async (city, user) => {
   const request = await fetch(`${base}q=${city}&username=${user}`);
   const res = await request.json();
-
+  console.log("Response back", res);
   trip.city = res.geonames[0].name;
 };
 
 app.post("/document", async (req, res) => {
   trip = {};
   try {
-    const city = req.body.city;
     await getCityDetail(city, userName);
-    res.json();
+    res.json({
+      status: "sucess",
+      city: req.body.city,
+    });
   } catch (error) {
-    res.send(status);
+    console.log(error);
   }
+});
+app.listen(8080, () => {
+  console.log(`Listening on 8080`);
 });

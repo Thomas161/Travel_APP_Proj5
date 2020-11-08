@@ -1,9 +1,8 @@
 const fetch = require("node-fetch");
 
 const getTripInformation = async (url, data) => {
-  const request = await fetch(url, {
+  const request = fetch(url, {
     method: "POST",
-    credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
     },
@@ -11,23 +10,25 @@ const getTripInformation = async (url, data) => {
   });
 
   try {
-    const data = await request.text().then(console.log(data));
+    const data = await request;
+    console.log("What the hell is this => ", data); //response object
     return data;
   } catch (error) {
     console.log("Error", error);
   }
+  return request;
 };
 export const formSubmit = async (e) => {
   e.preventDefault();
 
-  let city = document.getElementById("city").value;
+  let cityData = document.getElementById("city").value;
 
-  const data = {
-    city: city,
-  };
-  const trip = await getTripInformation("http://localhost:8080/document", data);
-  console.log(trip); //undefined
-  let d = document.getElementById("demo");
-  d.innerHTML = trip;
-  console.log("Object : ", typeof trip);
+  const trip = await getTripInformation(
+    "http://localhost:8080/document",
+    cityData
+  ).then((w) => console.log("what is in here", w));
+  console.log("Whats this", trip);
+  //   let d = document.getElementById("demo");
+  //   d.innerHTML = data;
+  //   console.log("Object : ", typeof trip);
 };
