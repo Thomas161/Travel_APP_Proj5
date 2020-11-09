@@ -29,9 +29,14 @@ export const formSubmit = async (e) => {
   e.preventDefault();
 
   let city = document.getElementById("city").value;
-  console.log("city", city);
-  const data = await postData("http://localhost:8080/tripInfo", city);
-  console.log("Response coming back", data);
+  console.log("city", city); //input value from dom
+
+  //data to send back to server
+  const data = {
+    city: city,
+  };
+  const journey = await postData("http://localhost:8080/tripInfo", data);
+  console.log("Response coming back", journey);
 };
 
 // const getFullURL = async (url, city, user) => {

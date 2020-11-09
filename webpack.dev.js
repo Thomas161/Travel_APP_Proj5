@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-// const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 
 module.exports = {
@@ -60,26 +59,26 @@ module.exports = {
       clientsClaim: true,
       skipWaiting: true,
 
-      // Define runtime caching rules.
-      runtimeCaching: [
-        {
-          // Match any request that ends with .png, .jpg, .jpeg or .svg.
-          urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+      // // Define runtime caching rules.
+      // runtimeCaching: [
+      //   {
+      //     // Match any request that ends with .png, .jpg, .jpeg or .svg.
+      //     urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
 
-          // Apply a cache-first strategy.
-          handler: "CacheFirst",
+      //     // Apply a cache-first strategy.
+      //     handler: "CacheFirst",
 
-          options: {
-            // Use a custom cache name.
-            cacheName: "images",
+      //     options: {
+      //       // Use a custom cache name.
+      //       cacheName: "images",
 
-            // Only cache 5 images.
-            expiration: {
-              maxEntries: 5,
-            },
-          },
-        },
-      ],
+      //       // Only cache 5 images.
+      //       expiration: {
+      //         maxEntries: 5,
+      //       },
+      //     },
+      //   },
+      // ],
     }),
   ],
 };

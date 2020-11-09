@@ -14,7 +14,7 @@ const WEATHER_BASE = process.env.API_WEATHERBIT_BASE;
 const WEATHER_KEY = process.env.API_WEATHERBIT_KEY;
 const express = require("express");
 const app = express();
-let trip = {};
+// let trip = {};
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.text());
@@ -49,21 +49,29 @@ app.listen(8080, () => {
   console.log(`Listening on 8080`);
 });
 
+//send request to geoname server
 const getCityDetail = async (city, user) => {
   const request = await fetch(`${GEONAMES_BASE}q=${city}&username=${user}`);
+  console.log("request", request);
   const res = await request.json();
-
+  console.log("Response back requesting info from geonames", res);
+  let trip = {};
   trip.city = res.geonames[0].name;
+  trip.population = res.geonames[0].population;
+  trip.long = res.geonames[0].lng;
+  return trip;
 };
 app.post("/tripInfo", async (req, res) => {
-  trip = {};
+  //empty out trip
+  // trip = {};
 
   try {
     const city = req.body.city;
 
-    await getCityDetail(city, GEONAMES_USER);
+    let trip = await getCityDetail(city, GEONAMES_USER);
+    //message: 'success' is coming back to front end in console
     res.json({
-      city,
+      trip: trip,
       message: "success",
     });
   } catch (err) {
