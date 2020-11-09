@@ -8,31 +8,26 @@ export const formSubmit = async (e) => {
   e.preventDefault();
 
   let cityData = document.getElementById("city").value;
-
-  const request = await fetch(`${base}q=${cityData}&username=${userName}`);
-  console.log("request", request); //404
   console.log("city", cityData);
-  //   console.log("Response from api call", convertResponse);
-  //   const city = convertResponse;
-  try {
+  getFullURL(base, cityData, userName).then((res) => {
+    console.log("Response coming back", res);
+    const city = res.geonames[0].name;
     postData("/sent", {
       city,
     });
+  });
+};
+
+const getFullURL = async (url, city, user) => {
+  const request = await fetch(`${url}q=${city}&username=${user}`);
+  try {
+    const newIncomingData = await request.json();
+    console.log(newIncomingData);
+    return newIncomingData;
   } catch (err) {
     console.log(err);
   }
 };
-
-// const getFullURL = async (base, city, user) => {
-//   const request = await fetch(`${base}q=${city}&username=${user}`);
-//   try {
-//     const newIncomingData = await request.json();
-//     console.log(newIncomingData);
-//     return newIncomingData;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
 // async post data to server
 const postData = async (url = "", data = {}) => {
   let res = await fetch(url, {
