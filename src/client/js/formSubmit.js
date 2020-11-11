@@ -14,7 +14,7 @@ const postData = async (url = "", data = {}) => {
   });
   try {
     const newIncomingData = await res.json();
-    console.log("Incoming data =>", newIncomingData);
+    console.log("Incoming data =>", newIncomingData.trip);
     return newIncomingData;
   } catch (err) {
     console.log("Error here", err);
@@ -36,9 +36,12 @@ export const formSubmit = async (e) => {
   let d = document.getElementById("demo");
   let d2 = document.getElementById("demo2");
   let d3 = document.getElementById("demo3");
+  let d4 = document.getElementById("demo4");
   d.innerHTML = journey.trip.city;
-  d2.innerHTML = JSON.stringify(journey.trip.lat);
-  d3.innerHTML = JSON.stringify(journey.trip.lng);
+  d2.innerHTML = journey.trip.country;
+  d3.innerHTML = journey.trip.population;
+  d4.innerHTML =
+    "Latitude:" + journey.trip.latitude + "Longitude:" + journey.trip.longitude;
   // updateHTML(journey);
   clearInput();
 };

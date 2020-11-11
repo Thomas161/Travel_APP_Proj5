@@ -53,18 +53,18 @@ app.listen(8080, () => {
 
 // let newCity = {};
 //send request to geoname server
-const getCityDetail = async (city, key) => {
+const getCityDetail = async (key, city) => {
   // http://api.geonames.org/search?username=${key}&type=json&name=Vienna&maxRows=1 => works
   // const request = await fetch(`${base}${key}&type=json&name=${city}`);
-  console.log("Undefined city", city);
+  console.log("defined city", city);
   // console.log("defined key", key);
   // const request = await fetch(
-  //   `http://api.geonames.org/searchJSON?maxRows=1&q=${city}&username=${key}`
-  // );
+  //   `http://api.geonames.org/searchJSON?q=${city}&username=${key}&maxRows=1 `
+
   const request = await fetch(
-    `http://api.geonames.org/postalCodeSearchJSON?placename=${city}&maxRows=10&username=${key}`
+    `    http://api.geonames.org/searchJSON?username=${key}&name=${city}&maxRows=2`
   );
-  // console.log(request);
+  console.log("Request from fetched api =>", request);
   // `http://api.geonames.org/search?username=${key}&type=json&name=${city}&maxRows=1`
   // `http://api.geonames.org/search?q=${city}&fuzzy=0.8&username=${key}`
   // console.log("request", request);
@@ -72,9 +72,11 @@ const getCityDetail = async (city, key) => {
   console.log("Response back from geonames", res);
   let trip = {};
   trip.city = city;
-  trip.long = res.postalCodes[0].lng;
-  trip.lat = res.postalCodes[0].lat;
-  trip.country = res.postalCodes[0].countryCode;
+  trip.country = res.geonames[0].countryName;
+  trip.population = res.geonames[0].lng;
+  trip.longitude = res.geonames[0].lng;
+  trip.latitude = res.geonames[0].lat;
+
   return trip;
 };
 
@@ -97,7 +99,7 @@ app.post("/tripInfo", async (req, res) => {
   try {
     const city = req.body.city;
     console.log("City in endpoint", city);
-    let trip = await getCityDetail(city, GEONAMES_USER);
+    let trip = await getCityDetail(GEONAMES_USER, city);
     // let trip2 = await getWeatherDetail(WEATHER_BASE, trip.cityId, WEATHER_KEY);
     //message: 'success' is coming back to front end in console
     res.json({
