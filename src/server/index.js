@@ -52,20 +52,21 @@ app.listen(8080, () => {
 
 //send request to geoname server
 const getCityDetail = async (city, key) => {
-  // http://api.geonames.org/search?username=tommy161&type=json&name=Vienna&maxRows=1 => works
+  // http://api.geonames.org/search?username=${key}&type=json&name=Vienna&maxRows=1 => works
   // const request = await fetch(`${base}${key}&type=json&name=${city}`);
   console.log("Undefined city", city);
+  // console.log("defined key", key);
   const request = await fetch(
     `http://api.geonames.org/searchJSON?maxRows=1&q=${city}&username=${key}`
   );
   console.log(
-    `http://api.geonames.org/searchJSON?maxRows=1&q=${city}&username=tommy161`
+    `http://api.geonames.org/searchJSON?maxRows=1&q=${city}&username=${key}`
   );
   // `http://api.geonames.org/search?username=${key}&type=json&name=${city}&maxRows=1`
   // `http://api.geonames.org/search?q=${city}&fuzzy=0.8&username=${key}`
   // console.log("request", request);
   const res = await request.json();
-  console.log("Response back requesting info from geonames", res);
+  console.log("Response back from geonames", res);
   let trip = {};
   trip.city = res.geonames[0];
   // trip.country = res.geonames[0].countryName;
@@ -92,9 +93,9 @@ app.post("/tripInfo", async (req, res) => {
   // trip = {};
 
   try {
-    const city = req.body.city;
-    console.log("City in endpoint", city);
-    let trip = await getCityDetail(city, GEONAMES_USER);
+    const cityData = req.body.city;
+    console.log("City in endpoint", cityData);
+    let trip = await getCityDetail(cityData, GEONAMES_USER);
     // let trip2 = await getWeatherDetail(WEATHER_BASE, trip.cityId, WEATHER_KEY);
     //message: 'success' is coming back to front end in console
     res.json({
