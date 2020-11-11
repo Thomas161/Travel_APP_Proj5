@@ -31,11 +31,12 @@ export const formSubmit = async (e) => {
     city: city,
   };
   const journey = await postData("http://localhost:8080/tripInfo", data);
-  console.log("Response coming back", journey);
-  clearInput();
+  // console.log("Response coming back", journey);
+
   let d = document.getElementById("demo");
-  d.innerHTML = journey.city;
+  d.innerHTML = journey;
   // updateHTML(journey);
+  clearInput();
 };
 
 const clearInput = () => {
