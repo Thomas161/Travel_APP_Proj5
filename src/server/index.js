@@ -18,7 +18,7 @@ const app = express();
 // let trip = {};
 
 const bodyParser = require("body-parser");
-app.use(bodyParser.text());
+app.use(bodyParser.json());
 
 const cors = require("cors");
 const { urlencoded } = require("body-parser");
@@ -72,10 +72,9 @@ const getCityDetail = async (city, key) => {
   console.log("Response back from geonames", res);
   let trip = {};
   trip.city = city;
-  // trip.country = res.geonames[0].countryName;
-  // trip.long = res.geonames[0].lng;
-  // trip.lat = res.geonames[0].lat;
-  // trip.population = res.geonames[0].population;
+  trip.long = res.postalCodes[0].lng;
+  trip.lat = res.postalCodes[0].lat;
+  trip.country = res.postalCodes[0].countryCode;
   return trip;
 };
 

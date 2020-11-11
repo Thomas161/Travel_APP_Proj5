@@ -31,10 +31,14 @@ export const formSubmit = async (e) => {
     city: city,
   };
   const journey = await postData("http://localhost:8080/tripInfo", data);
-  // console.log("Response coming back", journey);
+  console.log("Response coming back", journey);
 
   let d = document.getElementById("demo");
-  d.innerHTML = journey;
+  let d2 = document.getElementById("demo2");
+  let d3 = document.getElementById("demo3");
+  d.innerHTML = journey.trip.city;
+  d2.innerHTML = JSON.stringify(journey.trip.lat);
+  d3.innerHTML = JSON.stringify(journey.trip.lng);
   // updateHTML(journey);
   clearInput();
 };
