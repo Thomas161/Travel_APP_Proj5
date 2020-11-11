@@ -32,7 +32,12 @@ export const formSubmit = async (e) => {
   };
   const journey = await postData("http://localhost:8080/tripInfo", data);
   console.log("Response coming back", journey);
+  clearInput();
   let d = document.getElementById("demo");
-  d.innerHTML = journey;
+  d.innerHTML = journey.city;
   // updateHTML(journey);
+};
+
+const clearInput = () => {
+  return (document.getElementById("city").value = "");
 };

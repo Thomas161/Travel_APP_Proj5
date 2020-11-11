@@ -56,26 +56,25 @@ const getCityDetail = async (city, user) => {
   const res = await request.json();
   console.log("Response back requesting info from geonames", res);
   let trip = {};
-  trip.city = res.geonames[0].name;
-  trip.population = res.geonames[0].population;
-  trip.long = res.geonames[0].lng;
+  trip.city = res.geonames[5].toponymName;
+  trip.country = res.geonames[5].countryName;
+  trip.long = res.geonames[5].lng;
+  trip.cityId = res.geonames[5].geonameId;
   return trip;
 };
 
-const getWeatherDetail = async (city, user) => {
-  // 'https://api.weatherbit.io/v2.0/forecast/hourly?city=Dallas&country=US&key=1209f1f5b1fc42ee904201358a838990&hours=48'
-  const request = await fetch(
-    `https://api.weatherbit.io/v2.0/forecast/hourly?city${city}&country=US&Key=${user}&hours=24`
-  );
-  console.log("request", request);
-  const res = await request.json();
-  console.log("Response back requesting info from geonames", res);
-  let trip = {};
-  trip.temp = res.data[0].temp;
-  trip.wind = res.data[0].wind_gust_spd;
-  trip.description = res.data[0].weather.description;
-  return trip;
-};
+// const getWeatherDetail = async (url, cityId, user) => {
+//   // 'https://api.weatherbit.io/v2.0/forecast/hourly?city=Dallas&country=US&key=1209f1f5b1fc42ee904201358a838990&hours=48'
+//   const request = await fetch(`${url}${cityId}&Key=${user}&hours=96`);
+//   console.log("request", request);
+//   const res = await request.json();
+//   console.log("Response back requesting info from geonames", res);
+//   let trip = {};
+//   trip.temp = res.data[0].temp;
+//   trip.wind = res.data[0].wind_gust_spd;
+//   trip.description = res.data[0].weather.description;
+//   return trip;
+// };
 app.post("/tripInfo", async (req, res) => {
   //empty out trip
   // trip = {};
@@ -84,11 +83,11 @@ app.post("/tripInfo", async (req, res) => {
     const city = req.body.city;
 
     let trip = await getCityDetail(city, GEONAMES_USER);
-    let trip2 = await getWeatherDetail(city, WEATHER_KEY);
+    // let trip2 = await getWeatherDetail(WEATHER_BASE, trip.cityId, WEATHER_KEY);
     //message: 'success' is coming back to front end in console
     res.json({
       trip: trip,
-      trip2: trip2,
+      // trip2: trip2,
       message: "success",
     });
   } catch (err) {
