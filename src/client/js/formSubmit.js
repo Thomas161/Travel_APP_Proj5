@@ -37,11 +37,18 @@ export const formSubmit = async (e) => {
   let d2 = document.getElementById("demo2");
   let d3 = document.getElementById("demo3");
   let d4 = document.getElementById("demo4");
+  let d5 = document.getElementById("demo5");
+  let d6 = document.getElementById("demo6");
+  let d7 = document.getElementById("demo7");
   d.innerHTML = journey.trip.city;
   d2.innerHTML = journey.trip.country;
   d3.innerHTML = journey.trip.population;
   d4.innerHTML =
     "Latitude:" + journey.trip.latitude + "Longitude:" + journey.trip.longitude;
+  d5.innerHTML = journey.trip2.temp;
+  d6.innerHTML = journey.trip2.description;
+  d7.innerHTML = `<img alt="forecast_icon" src="https://www.weatherbit.io/static/img/icons/${journey.trip2.icon}.png"/>  `;
+
   // updateHTML(journey);
   clearInput();
 };

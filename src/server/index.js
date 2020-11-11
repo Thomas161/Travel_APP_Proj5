@@ -6,16 +6,14 @@ const fetch = require("node-fetch");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const GEONAMES_BASE = process.env.API_GEONAMES_BASE;
+// const GEONAMES_BASE = process.env.API_GEONAMES_BASE;
 const GEONAMES_USER = process.env.API_GEONAMES_USERNAME;
-const geonames_city = "q=";
 const PIXABAY_BASE = process.env.API_PIXABAY_BASE;
 const PIXABAY_KEY = process.env.API_PIXABAY_KEY;
 const WEATHER_BASE = process.env.API_WEATHERBIT_BASE;
 const WEATHER_KEY = process.env.API_WEATHERBIT_KEY;
 const express = require("express");
 const app = express();
-// let trip = {};
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -28,6 +26,65 @@ app.use(express.static("dist"));
 
 app.get("/", (req, res) => {
   res.sendFile("dist/index.html");
+});
+
+app.listen(8080, () => {
+  console.log(`Listening on 8080`);
+});
+
+// let newCity = {};
+//send request to geoname server
+const getCityDetail = async (key, city) => {
+  console.log("defined city", city);
+  const request = await fetch(
+    `    http://api.geonames.org/searchJSON?username=${key}&name=${city}&maxRows=2`
+  );
+  console.log("Request from fetched api =>", request);
+
+  const res = await request.json();
+  console.log("Response back from geonames", res);
+  let trip = {};
+  trip.city = city;
+  trip.country = res.geonames[0].countryName;
+  trip.population = res.geonames[0].lng;
+  trip.longitude = res.geonames[0].lng;
+  trip.latitude = res.geonames[0].lat;
+
+  return trip;
+};
+
+const getWeatherDetail = async (city, key) => {
+  // 'https://api.weatherbit.io/v2.0/forecast/hourly?city=Dallas&country=US&key=1209f1f5b1fc42ee904201358a838990&hours=48'
+  const request = await fetch(
+    `https://api.weatherbit.io/v2.0/current?city=${city}&key=${key}`
+  );
+  console.log("request", request);
+  const res = await request.json();
+  console.log("Response back requesting info from geonames", res);
+  let trip = {};
+  trip.temp = res.data[0].temp;
+  trip.description = res.data[0].weather.description;
+  trip.icon = res.data[0].weather.icon;
+  return trip;
+};
+app.post("/tripInfo", async (req, res) => {
+  //empty out trip
+  // trip = {};
+
+  try {
+    const city = req.body.city;
+    console.log("City in endpoint", city);
+    let trip = await getCityDetail(GEONAMES_USER, city);
+    let trip2 = await getWeatherDetail(city, WEATHER_KEY);
+    //message: 'success' is coming back to front end in console
+    res.json({
+      trip: trip,
+      trip2: trip2,
+      // message: "success",
+    });
+  } catch (err) {
+    console.log("error", err);
+  }
 });
 
 /**FETCH REQUESTS FOR ALL 3 API'S */
@@ -46,80 +103,3 @@ app.get("/", (req, res) => {
 //   .then((res) => res.json())
 //   .then((data) => console.log(data))
 //   .catch((e) => console.log(e));
-
-app.listen(8080, () => {
-  console.log(`Listening on 8080`);
-});
-
-// let newCity = {};
-//send request to geoname server
-const getCityDetail = async (key, city) => {
-  // http://api.geonames.org/search?username=${key}&type=json&name=Vienna&maxRows=1 => works
-  // const request = await fetch(`${base}${key}&type=json&name=${city}`);
-  console.log("defined city", city);
-  // console.log("defined key", key);
-  // const request = await fetch(
-  //   `http://api.geonames.org/searchJSON?q=${city}&username=${key}&maxRows=1 `
-
-  const request = await fetch(
-    `    http://api.geonames.org/searchJSON?username=${key}&name=${city}&maxRows=2`
-  );
-  console.log("Request from fetched api =>", request);
-  // `http://api.geonames.org/search?username=${key}&type=json&name=${city}&maxRows=1`
-  // `http://api.geonames.org/search?q=${city}&fuzzy=0.8&username=${key}`
-  // console.log("request", request);
-  const res = await request.json();
-  console.log("Response back from geonames", res);
-  let trip = {};
-  trip.city = city;
-  trip.country = res.geonames[0].countryName;
-  trip.population = res.geonames[0].lng;
-  trip.longitude = res.geonames[0].lng;
-  trip.latitude = res.geonames[0].lat;
-
-  return trip;
-};
-
-// const getWeatherDetail = async (url, cityId, user) => {
-//   // 'https://api.weatherbit.io/v2.0/forecast/hourly?city=Dallas&country=US&key=1209f1f5b1fc42ee904201358a838990&hours=48'
-//   const request = await fetch(`${url}${cityId}&Key=${user}&hours=96`);
-//   console.log("request", request);
-//   const res = await request.json();
-//   console.log("Response back requesting info from geonames", res);
-//   let trip = {};
-//   trip.temp = res.data[0].temp;
-//   trip.wind = res.data[0].wind_gust_spd;
-//   trip.description = res.data[0].weather.description;
-//   return trip;
-// };
-app.post("/tripInfo", async (req, res) => {
-  //empty out trip
-  // trip = {};
-
-  try {
-    const city = req.body.city;
-    console.log("City in endpoint", city);
-    let trip = await getCityDetail(GEONAMES_USER, city);
-    // let trip2 = await getWeatherDetail(WEATHER_BASE, trip.cityId, WEATHER_KEY);
-    //message: 'success' is coming back to front end in console
-    res.json({
-      trip: trip,
-      // trip2: trip2,
-      // message: "success",
-    });
-  } catch (err) {
-    console.log("error", err);
-  }
-});
-
-// app.get("/retrieve", (req, res) => {
-//   res.status(200).send(JSON.parse(JSON.stringify(trip)));
-// });
-// app.post("/sent", (req, res) => {
-//   // let data = req.body;
-//   console.log("Request", req);
-//   trip = {
-//     city: req.body.city,
-//   };
-//   res.status(200).send(JSON.parse(JSON.stringify(trip)));
-// });
