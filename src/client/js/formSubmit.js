@@ -1,6 +1,14 @@
 /**Global Variables */
-const fetch = require("node-fetch");
+import { clearInput } from "./cleanInputField";
 
+const fetch = require("node-fetch");
+let d = document.getElementById("demo");
+let d2 = document.getElementById("demo2");
+let d3 = document.getElementById("demo3");
+let d4 = document.getElementById("demo4");
+let d5 = document.getElementById("demo5");
+let d6 = document.getElementById("demo6");
+let d7 = document.getElementById("demo7");
 /**Helper functions */
 // async post data to server
 const postData = async (url = "", data = {}) => {
@@ -33,13 +41,6 @@ export const formSubmit = async (e) => {
   const journey = await postData("http://localhost:8080/tripInfo", data);
   console.log("Response coming back", journey);
 
-  let d = document.getElementById("demo");
-  let d2 = document.getElementById("demo2");
-  let d3 = document.getElementById("demo3");
-  let d4 = document.getElementById("demo4");
-  let d5 = document.getElementById("demo5");
-  let d6 = document.getElementById("demo6");
-  let d7 = document.getElementById("demo7");
   d.innerHTML = journey.trip.city;
   d2.innerHTML = journey.trip.country;
   d3.innerHTML = journey.trip.population;
@@ -51,8 +52,4 @@ export const formSubmit = async (e) => {
 
   // updateHTML(journey);
   clearInput();
-};
-
-const clearInput = () => {
-  return (document.getElementById("city").value = "");
 };

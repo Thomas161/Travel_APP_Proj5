@@ -1,10 +1,18 @@
-console.log("Test runs");
+// console.log("Test runs");
 
-describe("test ", () => {
-  test("test to run", () => {
-    let a = 12;
-    let b = 12;
-    let sum = a + b;
-    expect(sum).toEqual(24);
+import { formSubmit } from "../src/client/js/formSubmit";
+
+describe("check suite for formSubmit ", () => {
+  test("Check that formSubmit exists", () => {
+    expect(formSubmit()).toBeDefined();
+  });
+  test("Check that formSubmit has been called", () => {
+    const formMock = jest.fn(() => true);
+    formMock();
+    expect(formMock).toHaveReturnedTimes(1);
+  });
+
+  test("Test truthiness for inner function", () => {
+    expect(formSubmit()).toBeTruthy();
   });
 });
