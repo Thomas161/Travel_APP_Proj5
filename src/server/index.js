@@ -8,6 +8,7 @@ dotenv.config();
 
 const GEONAMES_BASE = process.env.API_GEONAMES_BASE;
 const GEONAMES_USER = process.env.API_GEONAMES_USERNAME;
+const geonames_city = "q=";
 const PIXABAY_BASE = process.env.API_PIXABAY_BASE;
 const PIXABAY_KEY = process.env.API_PIXABAY_KEY;
 const WEATHER_BASE = process.env.API_WEATHERBIT_BASE;
@@ -50,25 +51,27 @@ app.listen(8080, () => {
   console.log(`Listening on 8080`);
 });
 
+// let newCity = {};
 //send request to geoname server
 const getCityDetail = async (city, key) => {
   // http://api.geonames.org/search?username=${key}&type=json&name=Vienna&maxRows=1 => works
   // const request = await fetch(`${base}${key}&type=json&name=${city}`);
   console.log("Undefined city", city);
   // console.log("defined key", key);
+  // const request = await fetch(
+  //   `http://api.geonames.org/searchJSON?maxRows=1&q=${city}&username=${key}`
+  // );
   const request = await fetch(
-    `http://api.geonames.org/searchJSON?maxRows=1&q=${city}&username=${key}`
+    `http://api.geonames.org/postalCodeSearchJSON?placename=${city}&maxRows=10&username=${key}`
   );
-  console.log(
-    `http://api.geonames.org/searchJSON?maxRows=1&q=${city}&username=${key}`
-  );
+  // console.log(request);
   // `http://api.geonames.org/search?username=${key}&type=json&name=${city}&maxRows=1`
   // `http://api.geonames.org/search?q=${city}&fuzzy=0.8&username=${key}`
   // console.log("request", request);
   const res = await request.json();
   console.log("Response back from geonames", res);
   let trip = {};
-  trip.city = res.geonames[0];
+  trip.city = city;
   // trip.country = res.geonames[0].countryName;
   // trip.long = res.geonames[0].lng;
   // trip.lat = res.geonames[0].lat;
@@ -93,9 +96,9 @@ app.post("/tripInfo", async (req, res) => {
   // trip = {};
 
   try {
-    const cityData = req.body.city;
-    console.log("City in endpoint", cityData);
-    let trip = await getCityDetail(cityData, GEONAMES_USER);
+    const city = req.body.city;
+    console.log("City in endpoint", city);
+    let trip = await getCityDetail(city, GEONAMES_USER);
     // let trip2 = await getWeatherDetail(WEATHER_BASE, trip.cityId, WEATHER_KEY);
     //message: 'success' is coming back to front end in console
     res.json({
