@@ -1,6 +1,7 @@
 ## Travel_App_Proj5
 
-![travel](https://image.shutterstock.com/image-vector/travel-vector-set-cartoon-style-260nw-132621773.jpg)
+![travel](https://media.istockphoto.com/vectors/lets-travel-with-cartoon-style-vector-id1074755092?s=170x170)
+
 :world_map: :mountain_snow: :desert_island :national_park: :airplane: :passenger_ship: :luggage:
 
 Final project of Udacity Front-End Web Developer Nanodegree, a travel app that seraches a city and returns some basic data regarding country, longitude, latitude, date of trip etc .
