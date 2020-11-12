@@ -8,9 +8,9 @@ dotenv.config();
 
 // const GEONAMES_BASE = process.env.API_GEONAMES_BASE;
 const GEONAMES_USER = process.env.API_GEONAMES_USERNAME;
-const PIXABAY_BASE = process.env.API_PIXABAY_BASE;
+// const PIXABAY_BASE = process.env.API_PIXABAY_BASE;
 const PIXABAY_KEY = process.env.API_PIXABAY_KEY;
-const WEATHER_BASE = process.env.API_WEATHERBIT_BASE;
+// const WEATHER_BASE = process.env.API_WEATHERBIT_BASE;
 const WEATHER_KEY = process.env.API_WEATHERBIT_KEY;
 const express = require("express");
 const app = express();
@@ -54,7 +54,6 @@ const getCityDetail = async (key, city) => {
 };
 
 const getWeatherDetail = async (city, key) => {
-  // 'https://api.weatherbit.io/v2.0/forecast/hourly?city=Dallas&country=US&key=1209f1f5b1fc42ee904201358a838990&hours=48'
   const request = await fetch(
     `https://api.weatherbit.io/v2.0/current?city=${city}&key=${key}`
   );
@@ -67,6 +66,19 @@ const getWeatherDetail = async (city, key) => {
   trip.icon = res.data[0].weather.icon;
   return trip;
 };
+const getImageDetail = async (city, key) => {
+  const request = await fetch(
+    `https://pixabay.com/api/?key=${key}&q=${city}&category=travel`
+  );
+  console.log("request", request);
+  const res = await request.json();
+  console.log("Response back requesting info from geonames", res);
+  let trip = {};
+  trip.photo = res.hits[0].webformatURL;
+
+  return trip;
+};
+
 app.post("/tripInfo", async (req, res) => {
   //empty out trip
   // trip = {};
@@ -76,10 +88,12 @@ app.post("/tripInfo", async (req, res) => {
     console.log("City in endpoint", city);
     let trip = await getCityDetail(GEONAMES_USER, city);
     let trip2 = await getWeatherDetail(city, WEATHER_KEY);
+    let trip3 = await getImageDetail(city, PIXABAY_KEY);
     //message: 'success' is coming back to front end in console
     res.json({
       trip: trip,
       trip2: trip2,
+      trip3: trip3,
       // message: "success",
     });
   } catch (err) {

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@100&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -10,9 +11,20 @@
 }
 .first {
   top: 0;
-  height: 180px;
+  height: 140px;
 }
 #travelImg {
-  width: 100%;
-  height: 180px;
+  width: 50%;
+  height: 140px;
+  right: 0;
+  position: fixed;
+}
+#headerApp {
+  background-color: #f5f5dc;
+  left: 0;
+  position: fixed;
+  font-family: "Big Shoulders Stencil Text", cursive;
+  width: 50%;
+  text-align: center;
+  top: 50px;
 }

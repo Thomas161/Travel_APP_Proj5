@@ -9,6 +9,7 @@ let d4 = document.getElementById("demo4");
 let d5 = document.getElementById("demo5");
 let d6 = document.getElementById("demo6");
 let d7 = document.getElementById("demo7");
+let d8 = document.getElementById("demo8");
 /**Helper functions */
 // async post data to server
 const postData = async (url = "", data = {}) => {
@@ -49,7 +50,7 @@ export const formSubmit = async (e) => {
   d5.innerHTML = journey.trip2.temp;
   d6.innerHTML = journey.trip2.description;
   d7.innerHTML = `<img alt="forecast_icon" src="https://www.weatherbit.io/static/img/icons/${journey.trip2.icon}.png"/>  `;
-
+  d8.innerHTML = `<img alt="city_photo" src="https://pixabay.com/get/52e4d5404251a514f1dc846096293f771c3ddfe3564c704f752a7ad1914ec250_640.jpg"/>`;
   // updateHTML(journey);
   clearInput();
 };
