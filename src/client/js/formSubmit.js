@@ -1,5 +1,6 @@
-/**Global Variables */
 import { clearInput } from "./cleanInputField";
+
+/**Global Variables */
 
 const fetch = require("node-fetch");
 let d = document.getElementById("demo");
@@ -32,6 +33,7 @@ const postData = async (url = "", data = {}) => {
     console.log("Error here", err);
   }
 };
+
 export const formSubmit = async (e) => {
   e.preventDefault();
 
@@ -65,15 +67,17 @@ export const formSubmit = async (e) => {
   saveTrip.innerHTML = "Save Trip";
   saveTrip.classList.add("saveTrip");
   saveTrip.setAttribute("id", "generate");
+  saveTrip.onclick = function (evt) {
+    console.log("Event fired", evt.target);
+    console.log("clicked");
+    var listItem = document.createElement("li");
+    document.getElementById("list").appendChild(listItem).textContent =
+      d.innerHTML;
+  };
   insertAfter(containerButton, saveTrip);
   // updateHTML(journey);
   clearInput();
 };
-
-document.getElementById("generate").addEventListener("click", function (evt) {
-  console.log("Event fired", evt.target);
-  console.log("clicked");
-});
 
 function insertAfter(referenceNode, newNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);

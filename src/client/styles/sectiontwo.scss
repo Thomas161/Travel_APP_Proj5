@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -7,6 +8,16 @@
   top: 244px;
   height: 492px;
   background-color: gold;
+}
+#demo,
+#demo2,
+#demo3,
+#demo4,
+#demo5,
+#demo6,
+#demo7 {
+  font-family: "Stalinist One", cursive;
+  font-size: 14px;
 }
 #demo,
 #demo2,
