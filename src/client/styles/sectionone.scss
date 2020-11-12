@@ -4,7 +4,26 @@
 }
 
 .second {
-  top: 181px;
-  height: 240px;
+  top: 142px;
+  height: 100px;
   background-color: tomato;
+}
+
+.trip_info_form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.input_search,
+.input_date {
+  border-radius: 12px;
+}
+
+.input_submit {
+  color: white;
+  background: red;
+}
+.input_submit:hover {
+  cursor: pointer;
 }
