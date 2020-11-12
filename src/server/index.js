@@ -74,7 +74,7 @@ const getImageDetail = async (city, key) => {
   const res = await request.json();
   console.log("Response back requesting info from geonames", res);
   let trip = {};
-  trip.photo = res.hits[0].webformatURL;
+  trip.photo = res.hits[0].previewURL;
 
   return trip;
 };
