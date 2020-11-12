@@ -27,6 +27,11 @@ app.use(express.static("dist"));
 app.get("/", (req, res) => {
   res.sendFile("dist/index.html");
 });
+app.get("/test", (req, res) => {
+  res.json({
+    status: 200,
+  });
+});
 
 app.listen(8080, () => {
   console.log(`Listening on 8080`);
@@ -100,6 +105,8 @@ app.post("/tripInfo", async (req, res) => {
     console.log("error", err);
   }
 });
+
+// module.exports = app;
 
 /**FETCH REQUESTS FOR ALL 3 API'S */
 //GEONAMES
