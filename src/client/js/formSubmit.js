@@ -70,14 +70,23 @@ export const formSubmit = async (e) => {
   saveTrip.onclick = function (evt) {
     console.log("Event fired", evt.target);
     console.log("clicked");
-    var listItem = document.createElement("li");
-    document.getElementById("list").appendChild(listItem).textContent =
-      d.innerHTML;
+    let ulList = document.getElementById("list");
+    var liItem = document.createElement("li");
+    ulList.appendChild(liItem).textContent = d.innerHTML;
+    localStorage.setItem("city", d.innerHTML);
+    let button = document.createElement("button");
+    button.innerHTML = "Delete Trip";
+    button.addEventListener("click", removeTrip);
+    liItem.appendChild(button);
+    ulList.append(liItem);
   };
   insertAfter(containerButton, saveTrip);
   // updateHTML(journey);
   clearInput();
 };
+function removeTrip(e) {
+  e.target.parentNode.remove();
+}
 
 function insertAfter(referenceNode, newNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
