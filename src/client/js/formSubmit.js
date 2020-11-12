@@ -33,7 +33,14 @@ export const formSubmit = async (e) => {
   e.preventDefault();
 
   let city = document.getElementById("city").value;
+  let date = document.getElementById("depart_date").value;
+  let nowDate = new Date();
+  // let diffTime = Math.abs(date - nowDate);
+  // let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   console.log("city", city);
+  console.log("date departure", date);
+  console.log("Todays date", nowDate.getFullYear());
+  // console.log(diffDays + " days");
 
   //data to send back to server
   const data = {
@@ -56,6 +63,7 @@ export const formSubmit = async (e) => {
   d8.innerHTML = `<img alt="city_photo" src="${journey.trip3.photo}"/>`;
   let saveTrip = document.createElement("button");
   saveTrip.innerHTML = "Save Trip";
+  saveTrip.classList.add("saveTrip");
   insertAfter(d8, saveTrip);
   // updateHTML(journey);
   clearInput();

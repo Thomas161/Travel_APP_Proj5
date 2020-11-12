@@ -8,9 +8,32 @@
   height: 492px;
   background-color: gold;
 }
+#demo,
+#demo2,
+#demo3,
+#demo4,
+#demo5,
+#demo6,
+#demo7,
+#demo8 {
+  text-align: center;
+}
 
 #demo8 {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 150px;
+}
+
+#containerCard {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  height: 386px;
+  width: 100%;
+}
+.saveTrip {
+  position: relative;
 }
