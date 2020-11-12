@@ -15,11 +15,12 @@
 #demo5,
 #demo6,
 #demo7,
-#demo8 {
+#demo8,
+#demo9 {
   text-align: center;
 }
 
-#demo8 {
+#demo9 {
   position: relative;
   width: 100%;
   height: 150px;
@@ -28,7 +29,7 @@
 #containerCard {
   position: absolute;
   left: 50%;
-  top: 54%;
+  top: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
   height: 386px;
@@ -36,4 +37,8 @@
 }
 .saveTrip {
   position: relative;
+  color: #fff;
+  background: cornflowerblue;
+  width: 100px;
+  height: 42px;
 }

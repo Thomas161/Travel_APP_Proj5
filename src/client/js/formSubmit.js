@@ -10,6 +10,9 @@ let d5 = document.getElementById("demo5");
 let d6 = document.getElementById("demo6");
 let d7 = document.getElementById("demo7");
 let d8 = document.getElementById("demo8");
+let d9 = document.getElementById("demo9");
+let containerButton = document.getElementById("containerCard");
+
 /**Helper functions */
 // async post data to server
 const postData = async (url = "", data = {}) => {
@@ -52,22 +55,26 @@ export const formSubmit = async (e) => {
   d.innerHTML = journey.trip.city;
   d2.innerHTML = journey.trip.country;
   d3.innerHTML = journey.trip.population;
-  d4.innerHTML =
-    "Latitude: " +
-    journey.trip.latitude +
-    " Longitude: " +
-    journey.trip.longitude;
-  d5.innerHTML = journey.trip2.temp;
-  d6.innerHTML = journey.trip2.description;
-  d7.innerHTML = `<img alt="forecast_icon" src="https://www.weatherbit.io/static/img/icons/${journey.trip2.icon}.png"/>  `;
-  d8.innerHTML = `<img alt="city_photo" src="${journey.trip3.photo}"/>`;
+  d4.innerHTML = "Latitude: " + journey.trip.latitude;
+  d5.innerHTML = "Longitude: " + journey.trip.longitude;
+  d6.innerHTML = journey.trip2.temp + "&deg;C";
+  d7.innerHTML = journey.trip2.description;
+  d8.innerHTML = `<img alt="forecast_icon" src="https://www.weatherbit.io/static/img/icons/${journey.trip2.icon}.png"/>  `;
+  d9.innerHTML = `<img alt="city_photo" src="${journey.trip3.photo}"/>`;
   let saveTrip = document.createElement("button");
   saveTrip.innerHTML = "Save Trip";
   saveTrip.classList.add("saveTrip");
-  insertAfter(d8, saveTrip);
+  saveTrip.setAttribute("id", "generate");
+  insertAfter(containerButton, saveTrip);
   // updateHTML(journey);
   clearInput();
 };
+
+document.getElementById("generate").addEventListener("click", function (evt) {
+  console.log("Event fired", evt.target);
+  console.log("clicked");
+});
+
 function insertAfter(referenceNode, newNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
