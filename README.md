@@ -20,7 +20,7 @@ npm install
 
 #### scripts
 
-`npm run build-dev` dev build using webpack
-`npm run start` start express server
-`npm run test` run jest tests
-`npm run build-prod` build out for production
+- `npm run build-dev` dev build using webpack
+- `npm run start` start express server
+- `npm run test` run jest tests
+- `npm run build-prod` build out for production
