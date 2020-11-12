@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf node_modules/",
     "reinstall": "npm run clean && npm install",
-    "test": "jest --coverage",
+    "test": "jest --coverage --runInBand",
     "start": "node src/server/index.js",
     "build-prod": "webpack --config webpack.prod.js",
     "build-dev": "webpack-dev-server --config webpack.dev.js --open"

@@ -106,7 +106,7 @@ app.post("/tripInfo", async (req, res) => {
   }
 });
 
-// module.exports = app;
+module.exports = app;
 
 /**FETCH REQUESTS FOR ALL 3 API'S */
 //GEONAMES
