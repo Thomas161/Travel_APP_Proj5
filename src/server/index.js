@@ -106,21 +106,4 @@ app.post("/tripInfo", async (req, res) => {
   }
 });
 
-module.exports = app;
-
-/**FETCH REQUESTS FOR ALL 3 API'S */
-//GEONAMES
-// fetch(`${GEONAMES_BASE}q=london&username=${GEONAMES_USER}`)
-//   .then((res) => res.json())
-//   .then((data) => console.log(data))
-//   .catch((e) => console.log(e));
-//PIXABAY
-// fetch(`${PIXABAY_BASE}?key=${PIXABAY_KEY}&q=yellow+flowers&image_type=photo`)
-//   .then((res) => res.json())
-//   .then((data) => console.log(data))
-//   .catch((e) => console.log(e));
-//WEATHERBIT
-// fetch(`${WEATHER_BASE}&key=${WEATHER_KEY}&hours=120`)
-//   .then((res) => res.json())
-//   .then((data) => console.log(data))
-//   .catch((e) => console.log(e));
+// module.exports = app;
