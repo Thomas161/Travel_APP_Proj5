@@ -4,6 +4,7 @@ import { clearInput } from "./cleanInputField";
 
 const fetch = require("node-fetch");
 let d = document.getElementById("demo");
+let d1 = document.getElementById("demo1");
 let d2 = document.getElementById("demo2");
 let d3 = document.getElementById("demo3");
 let d4 = document.getElementById("demo4");
@@ -63,6 +64,7 @@ export const formSubmit = async (e) => {
   console.log("Response coming back", journey);
 
   d.innerHTML = journey.trip.city;
+  d1.innerHTML = `Departing ${date}: \n ${diffDays} days to go`;
   d2.innerHTML = journey.trip.country;
   d3.innerHTML = journey.trip.population;
   d4.innerHTML = "Latitude: " + journey.trip.latitude;
@@ -78,15 +80,19 @@ export const formSubmit = async (e) => {
   saveTrip.onclick = function (evt) {
     console.log("Event fired", evt.target);
     console.log("clicked");
-    let ulList = document.getElementById("list");
-    var liItem = document.createElement("li");
-    ulList.appendChild(liItem).textContent = d.innerHTML;
-    localStorage.setItem("city", d.innerHTML);
-    let button = document.createElement("button");
-    button.innerHTML = "Delete Trip";
-    button.addEventListener("click", removeTrip);
-    liItem.appendChild(button);
-    ulList.append(liItem);
+    setTimeout(() => {
+      document.getElementById("generate").style.display = "none";
+      // containerButton.style.display = "none";
+      let ulList = document.getElementById("list");
+      var liItem = document.createElement("li");
+      ulList.appendChild(liItem).textContent = d.innerHTML;
+      localStorage.setItem("city", d.innerHTML);
+      let button = document.createElement("button");
+      button.innerHTML = "Delete Trip";
+      button.addEventListener("click", removeTrip);
+      liItem.appendChild(button);
+      ulList.append(liItem);
+    }, 500);
   };
   insertAfter(containerButton, saveTrip);
   // updateHTML(journey);

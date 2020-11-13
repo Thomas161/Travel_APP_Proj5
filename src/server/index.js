@@ -6,11 +6,8 @@ const fetch = require("node-fetch");
 const dotenv = require("dotenv");
 dotenv.config();
 
-// const GEONAMES_BASE = process.env.API_GEONAMES_BASE;
 const GEONAMES_USER = process.env.API_GEONAMES_USERNAME;
-// const PIXABAY_BASE = process.env.API_PIXABAY_BASE;
 const PIXABAY_KEY = process.env.API_PIXABAY_KEY;
-// const WEATHER_BASE = process.env.API_WEATHERBIT_BASE;
 const WEATHER_KEY = process.env.API_WEATHERBIT_KEY;
 const express = require("express");
 const app = express();
