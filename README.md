@@ -26,3 +26,13 @@ npm install
 - `npm run start` start express server
 - `npm run test` run jest tests
 - `npm run build-prod` build out for production
+
+#### API Keys
+
+- create `.env` inside root of project
+
+```
+API_GEONAMES_USERNAME = <YOUR API KEY>
+API_PIXABAY_KEY = <YOUR API KEY>
+API_WEATHERBIT_KEY = <YOUR API KEY>
+```
