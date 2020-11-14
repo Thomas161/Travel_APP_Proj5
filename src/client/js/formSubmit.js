@@ -39,7 +39,7 @@ export const formSubmit = async (e) => {
   e.preventDefault();
 
   let city = document.getElementById("city").value;
-  let date = document.getElementById("depart_date").value;
+  let date = document.getElementById("departDate").value;
   let nowDate = new Date();
   let dateFuture = new Date(date);
   let timePassedMillisecondsCurrent = nowDate.getTime();
@@ -71,6 +71,7 @@ export const formSubmit = async (e) => {
   d7.innerHTML = journey.trip2.description;
   d8.innerHTML = `<img alt="forecast_icon" src="https://www.weatherbit.io/static/img/icons/${journey.trip2.icon}.png"/>  `;
   d9.innerHTML = `<img alt="city_photo" src="${journey.trip3.photo}"/>`;
+  document.querySelector(".tripInfoForm").style.visibility = "hidden";
   let saveTrip = document.createElement("button");
   saveTrip.innerHTML = "Save Trip";
   saveTrip.classList.add("saveTrip");
@@ -79,7 +80,7 @@ export const formSubmit = async (e) => {
     console.log("Event fired", evt.target);
     console.log("clicked");
     setTimeout(() => {
-      document.getElementById("generate").style.display = "none";
+      document.getElementById("generate").style.visibility = "hidden";
       // containerButton.style.display = "none";
       let ulList = document.getElementById("list");
       var liItem = document.createElement("li");
@@ -90,6 +91,7 @@ export const formSubmit = async (e) => {
       button.addEventListener("click", removeTrip);
       liItem.appendChild(button);
       ulList.append(liItem);
+      document.querySelector(".tripInfoForm").style.visibility = "visible";
     }, 500);
   };
   insertAfter(containerButton, saveTrip);

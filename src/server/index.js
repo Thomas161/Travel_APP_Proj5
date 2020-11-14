@@ -11,7 +11,7 @@ const PIXABAY_KEY = process.env.API_PIXABAY_KEY;
 const WEATHER_KEY = process.env.API_WEATHERBIT_KEY;
 const express = require("express");
 const app = express();
-const PORT = 8080;
+// const PORT = 8080;
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -28,10 +28,10 @@ app.get("/test", (req, res) => {
   });
 });
 if (process.env.NODE_ENV !== "test") {
-  app.listen(PORT);
+  app.listen(8080);
 }
 
-app.listen(PORT, () => {
+app.listen(3000, () => {
   console.log(`Listening on 8080`);
 });
 
