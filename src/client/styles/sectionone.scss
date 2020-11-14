@@ -9,21 +9,21 @@
   background-color: tomato;
 }
 
-.trip_info_form {
+.tripInfoForm {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.input_search,
-.input_date {
+.inputSearch,
+.inputDate {
   border-radius: 12px;
 }
 
-.input_submit {
+.inputSubmit {
   color: white;
   background: red;
 }
-.input_submit:hover {
+.inputSubmit:hover {
   cursor: pointer;
 }

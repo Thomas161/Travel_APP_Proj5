@@ -18,12 +18,9 @@
       </div>
       <div class="vert second">
         <section>
-          <form
-            class="trip_info_form"
-            onsubmit="return Client.formSubmit(event)"
-          >
+          <form class="tripInfoForm" onsubmit="return Client.formSubmit(event)">
             <input
-              class="trip_info_input input_search"
+              class="tripInfoInput inputSearch"
               type="search"
               id="city"
               placeholder="City??"
@@ -32,14 +29,14 @@
             <br />
 
             <input
-              class="trip_info_input input_date"
+              class="tripInfoInput inputDate"
               type="date"
-              id="depart_date"
-              name="trip-start"
+              id="departDate"
+              name="tripStart"
             />
 
             <input
-              class="trip_info_input input_submit"
+              class="tripInfoInput inputSubmit"
               type="submit"
               value="Search"
             />
@@ -77,12 +74,8 @@
         "depart_date"
       ).value = new Date().toISOString().substring(0, 10);
     </script>
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker.register("/service-worker.js");
-        });
-      }
-    </script>
+    <!-- <script>
+    
+    </script> -->
   </body>
 </html>

@@ -21,9 +21,6 @@ app.use(cors());
 
 app.use(express.static("dist"));
 
-app.get("/", (req, res) => {
-  res.sendFile("dist/index.html");
-});
 app.get("/test", (req, res) => {
   res.json({
     status: 200,
