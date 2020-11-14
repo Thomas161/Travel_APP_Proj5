@@ -76,6 +76,11 @@ export const formSubmit = async (e) => {
   saveTrip.innerHTML = "Save Trip";
   saveTrip.classList.add("saveTrip");
   saveTrip.setAttribute("id", "generate");
+  // saveTrip.classList.add("myCustomHover");
+  saveTrip.onmouseover = function (evt) {
+    evt.target.style.cursor = "pointer";
+    console.log("mouseover event firing");
+  };
   saveTrip.onclick = function (evt) {
     console.log("Event fired", evt.target);
     console.log("clicked");
