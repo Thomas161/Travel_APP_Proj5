@@ -18,7 +18,7 @@
       </div>
       <div class="vert second">
         <section>
-          <form class="tripInfoForm" onsubmit="return Client.formSubmit(event)">
+          <form class="tripInfoForm">
             <input
               class="tripInfoInput inputSearch"
               type="search"
@@ -68,14 +68,5 @@
         </section>
       </div>
     </div>
-    <script>
-      //set currrent date each time on DOM
-      document.getElementById(
-        "depart_date"
-      ).value = new Date().toISOString().substring(0, 10);
-    </script>
-    <!-- <script>
-    
-    </script> -->
   </body>
 </html>

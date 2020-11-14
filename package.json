@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf node_modules/",
     "reinstall": "npm run clean && npm install",
-    "test": "jest --coverage --runInBand",
+    "test": "NODE_ENV=test jest --no-cache  --detectOpenHandles --runInBand --forceExit",
     "start": "node src/server/index.js",
     "build-prod": "webpack --config webpack.prod.js",
     "build-dev": "webpack-dev-server --config webpack.dev.js --open"

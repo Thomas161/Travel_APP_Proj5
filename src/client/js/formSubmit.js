@@ -49,8 +49,6 @@ export const formSubmit = async (e) => {
   );
   let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   console.log("city", city);
-  // console.log("date departure", date);
-  // console.log("Current date", nowDate);
   console.log("Current date in time ", timePassedMillisecondsCurrent); //milliseconds returned
   console.log("Future date in time ", timePassedMillisecondsFuture); //milliseconds
   console.log("Diff time", diffTime);

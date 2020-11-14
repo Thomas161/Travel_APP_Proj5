@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
   formSub.addEventListener("submit", formSubmit);
 });
 
+document.getElementById(
+  "departDate"
+).value = new Date().toISOString().substring(0, 10);
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("/service-worker.js");
