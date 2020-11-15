@@ -82,7 +82,9 @@ const getImageDetail = async (city, key) => {
     const res = await request.json();
     console.log("Response back requesting info from geonames", res);
     let trip = {};
+
     trip.photo = res.hits[0].previewURL;
+
     return trip;
   } catch (err) {
     console.log("Errors fetching pixabay api", err);
