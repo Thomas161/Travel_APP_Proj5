@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf node_modules/",
     "reinstall": "npm run clean && npm install",
-    "test": "jest --testTimeout=10000 --coverage",
+    "test": "jest --testTimeout=10000 --coverage --unhandled-rejections=strict",
     "start": "node src/server/index.js",
     "build-prod": "webpack --config webpack.prod.js",
     "build-dev": "webpack-dev-server --config webpack.dev.js --open"

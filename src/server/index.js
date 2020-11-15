@@ -56,15 +56,15 @@ const getCityDetail = async (key, city) => {
   return trip;
 };
 
-const getWeatherDetail = async (city, key) => {
+const getWeatherDetail = async (city, date, key) => {
   const request = await fetch(
-    `https://api.weatherbit.io/v2.0/current?city=${city}&key=${key}`
+    `https://api.weatherbit.io/v2.0/forecast/daily?city=${city}&key=${key}`
   );
   console.log("request", request);
   const res = await request.json();
-  console.log("Response back requesting info from geonames", res);
+  console.log("Response back requesting info from weatherbit", res);
   let trip = {};
-  trip.temp = res.data[0].temp;
+  trip.temp = res.data.filter((t) => t.valid_date == date)[0].temp;
   trip.description = res.data[0].weather.description;
   trip.icon = res.data[0].weather.icon;
   return trip;
@@ -88,9 +88,10 @@ app.post("/tripInfo", async (req, res) => {
 
   try {
     const city = req.body.city;
+    const date = req.body.date;
     console.log("City in endpoint", city);
     let trip = await getCityDetail(GEONAMES_USER, city);
-    let trip2 = await getWeatherDetail(city, WEATHER_KEY);
+    let trip2 = await getWeatherDetail(city, date, WEATHER_KEY);
     let trip3 = await getImageDetail(city, PIXABAY_KEY);
     //message: 'success' is coming back to front end in console
     res.json({

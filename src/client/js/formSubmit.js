@@ -39,7 +39,9 @@ export const formSubmit = async (e) => {
   e.preventDefault();
 
   let city = document.getElementById("city").value;
+
   let date = document.getElementById("departDate").value;
+  console.log(date);
   let nowDate = new Date();
   let dateFuture = new Date(date);
   let timePassedMillisecondsCurrent = nowDate.getTime();
@@ -57,6 +59,7 @@ export const formSubmit = async (e) => {
   //data to send back to server
   const data = {
     city: city,
+    date: date,
   };
   const journey = await postData("http://localhost:8080/tripInfo", data);
   console.log("Response coming back", journey);
