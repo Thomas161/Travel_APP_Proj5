@@ -6,10 +6,17 @@
   "scripts": {
     "clean": "rm -rf node_modules/",
     "reinstall": "npm run clean && npm install",
-    "test": "NODE_ENV=test jest --no-cache  --detectOpenHandles --runInBand --forceExit",
+    "test": "jest --testTimeout=10000 --coverage",
     "start": "node src/server/index.js",
     "build-prod": "webpack --config webpack.prod.js",
     "build-dev": "webpack-dev-server --config webpack.dev.js --open"
+  },
+
+  "jest": {
+    "testEnvironment": "jsdom",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "repository": {
     "type": "git",

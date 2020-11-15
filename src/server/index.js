@@ -27,11 +27,11 @@ app.get("/test", (req, res) => {
     status: 200,
   });
 });
-if (process.env.NODE_ENV !== "test") {
-  app.listen(8080);
-}
+// if (process.env.NODE_ENV !== "test") {
+//   app.listen(8080);
+// }
 
-app.listen(3000, () => {
+app.listen(8080, () => {
   console.log(`Listening on 8080`);
 });
 
