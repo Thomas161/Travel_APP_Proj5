@@ -88,7 +88,7 @@ export const formSubmit = async (e) => {
     console.log("Event fired", evt.target);
     console.log("clicked");
     setTimeout(() => {
-      document.getElementById("generate").style.visibility = "hidden";
+      document.getElementById("generate").innerHTML = null;
       // containerButton.style.display = "none";
       let ulList = document.getElementById("list");
       var liItem = document.createElement("li");

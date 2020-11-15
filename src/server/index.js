@@ -65,8 +65,10 @@ const getWeatherDetail = async (city, date, key) => {
   console.log("Response back requesting info from weatherbit", res);
   let trip = {};
   trip.temp = res.data.filter((t) => t.valid_date == date)[0].temp;
-  trip.description = res.data[0].weather.description;
-  trip.icon = res.data[0].weather.icon;
+  trip.description = res.data.filter(
+    (d) => d.valid_date == date
+  )[0].weather.description;
+  trip.icon = res.data.filter((i) => i.valid_date == date)[0].weather.icon;
   return trip;
 };
 const getImageDetail = async (city, key) => {
