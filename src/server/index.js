@@ -48,11 +48,10 @@ const getCityDetail = async (key, city) => {
     trip.population = res.geonames[0].lng;
     trip.longitude = res.geonames[0].lng;
     trip.latitude = res.geonames[0].lat;
+    return trip;
   } catch (err) {
     console.log("Errors fetching geonames api", err);
   }
-
-  return trip;
 };
 
 const getWeatherDetail = async (city, date, key) => {
@@ -69,10 +68,10 @@ const getWeatherDetail = async (city, date, key) => {
       (d) => d.valid_date == date
     )[0].weather.description;
     trip.icon = res.data.filter((i) => i.valid_date == date)[0].weather.icon;
+    return trip;
   } catch (err) {
     console.log("Errors fetching weatherbit api", err);
   }
-  return trip;
 };
 const getImageDetail = async (city, key) => {
   try {
@@ -84,11 +83,10 @@ const getImageDetail = async (city, key) => {
     console.log("Response back requesting info from geonames", res);
     let trip = {};
     trip.photo = res.hits[0].previewURL;
+    return trip;
   } catch (err) {
     console.log("Errors fetching pixabay api", err);
   }
-
-  return trip;
 };
 
 app.post("/tripInfo", async (req, res) => {
@@ -99,11 +97,12 @@ app.post("/tripInfo", async (req, res) => {
     let trip = await getCityDetail(GEONAMES_USER, city);
     let trip2 = await getWeatherDetail(city, date, WEATHER_KEY);
     let trip3 = await getImageDetail(city, PIXABAY_KEY);
-    //message: 'success' is coming back to front end in console
+
     res.json({
       trip: trip,
       trip2: trip2,
       trip3: trip3,
+      errorMessage: new Error("Something went wrong"),
     });
   } catch (err) {
     console.log("error", err);
