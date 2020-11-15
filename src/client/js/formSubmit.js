@@ -1,7 +1,6 @@
 import { clearInput } from "./cleanInputField";
 
 /**Global Variables */
-
 const fetch = require("node-fetch");
 let d = document.getElementById("demo");
 let d1 = document.getElementById("demo1");
