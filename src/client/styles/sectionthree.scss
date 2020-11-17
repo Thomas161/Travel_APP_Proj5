@@ -20,12 +20,13 @@ label {
 ul {
   list-style-position: inside;
   overflow: auto;
-  background: deeppink;
+  background-color: deeppink;
   margin: 10px;
-  transition: 0.3s background ease-in-out;
+  transition-delay: 1s;
 }
 ul:hover {
-  background: lightcoral;
+  background-color: lightcoral;
+  cursor: pointer;
 }
 ul li {
   list-style-image: url("../assets/passport.png");
@@ -34,9 +35,10 @@ ul li {
 }
 #deleteTrip {
   position: inherit;
+  font-size: 13px;
   margin: 10px;
   width: 100px;
-  height: 25px;
+  height: 34px;
   color: firebrick;
   background-color: khaki;
   text-align: center;
