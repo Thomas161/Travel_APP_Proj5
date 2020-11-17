@@ -12,7 +12,7 @@ let d8 = document.getElementById("demo8");
 let d9 = document.getElementById("demo9");
 let containerButton = document.getElementById("containerCard");
 
-export const updateUI = () => {
+export const updateUI = (journey, date, diffDays) => {
   d.innerHTML = journey.trip.city;
   d1.innerHTML = `Departing ${date}: \n ${diffDays} days to go`;
   d2.innerHTML = journey.trip.country;

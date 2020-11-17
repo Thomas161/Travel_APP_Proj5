@@ -56,6 +56,6 @@ export const formSubmit = async (e) => {
     const journey = await postData("http://localhost:8080/tripInfo", data);
     console.log("Response coming back", journey);
 
-    updateUI();
+    updateUI(journey, date, diffDays);
   }
 };

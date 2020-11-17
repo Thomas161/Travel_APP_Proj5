@@ -16,7 +16,6 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
 const cors = require("cors");
-const { urlencoded } = require("body-parser");
 app.use(cors());
 
 app.use(express.static("dist"));
