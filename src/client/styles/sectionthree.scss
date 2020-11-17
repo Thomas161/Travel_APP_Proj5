@@ -5,15 +5,16 @@
 }
 
 #tripsListContainer {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
 }
 label {
   text-align: center;
   color: #fff;
   font-size: 14px;
+}
+ul {
+  list-style-position: inside;
 }
 ul li {
   list-style-type: none;
