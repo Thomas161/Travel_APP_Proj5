@@ -45,6 +45,7 @@ export const updateUI = (journey, date, diffDays) => {
       localStorage.setItem("city", d.innerHTML);
       let button = document.createElement("button");
       button.innerHTML = "Delete Trip";
+      button.setAttribute("id", "deleteTrip");
       button.addEventListener("click", removeTrip);
       liItem.appendChild(button);
       ulList.append(liItem);
