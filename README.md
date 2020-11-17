@@ -39,4 +39,4 @@ API_WEATHERBIT_KEY = <YOUR API KEY>
 
 #### localstorage feature
 
-** localStorage.setItem("city", d.innerHTML); ** allows for previous session information based on city to be stored in localstorage
+**localStorage.setItem("city", d.innerHTML);** allows for previous session information based on city to be stored in localstorage
