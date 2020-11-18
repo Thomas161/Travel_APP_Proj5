@@ -1,7 +1,7 @@
 const place = require("../client/js/api/geonamesAPI");
 const weather = require("../client/js/api/weatherbitAPI");
 const pix = require("../client/js/api/pixabayAPI");
-const covid = require("../client/js/api/covid19API");
+// const covid = require("../client/js/api/covid19API");
 
 process.binding(
   "http_parser"
@@ -45,14 +45,12 @@ app.post("/tripInfo", async (req, res) => {
     let trip2 = await mother;
     let im = pix.getImageDetail(city, PIXABAY_KEY);
     let trip3 = await im;
-    let disease = covid.getCovidData();
-    let covid19 = await disease;
 
     res.json({
       trip: trip,
       trip2: trip2,
       trip3: trip3,
-      covid19: covid19,
+
       errorMessage: new Error("Something went wrong"),
     });
   } catch (err) {

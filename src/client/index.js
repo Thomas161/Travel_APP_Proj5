@@ -1,4 +1,5 @@
 import { formSubmit } from "./js/formSubmit";
+import { getCovidData } from "./js/api/covid19API";
 
 import "./styles/topbanner.scss";
 import "./styles/sectionone.scss";
@@ -9,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM fully loaded and parsed");
   let formSub = document.querySelector(".tripInfoForm");
   formSub.addEventListener("submit", formSubmit);
+  let modalClick = document.querySelector("#ulCovid");
+  modalClick.addEventListener("click", getCovidData);
 });
 
 document.getElementById(
@@ -20,6 +23,6 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/service-worker.js");
   });
 }
-export { formSubmit };
+export { formSubmit, getCovidData };
 // console.log(formSubmit(e));
 // console.log(updateHTML(e));

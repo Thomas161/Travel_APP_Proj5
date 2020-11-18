@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-import { updateModal } from "../updateModalContainer";
+
 const getCovidData = async () => {
   try {
     const coronaRequest = await fetch(
@@ -11,8 +11,13 @@ const getCovidData = async () => {
     let cov = {};
     cov.covid19 = res[0].Cases;
     // alert(res[0].Cases);
-    console.log(cov);
-    updateModal(cov);
+    console.log("Cases returned", cov);
+    // let up = mod.updateModal(cov);
+    // up();
+    document.getElementById(
+      "cases"
+    ).innerHTML = `Cases in Australia : ${cov.covid19}`;
+
     return cov;
   } catch (err) {
     console.log("Errors found => ", err);

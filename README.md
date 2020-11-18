@@ -19,6 +19,7 @@ npm install
 - geonames api [geoname](https://www.geonames.org/)
 - weatherbit api [weatherbit](https://www.weatherbit.io/api)
 - pixabay api [pixabay](https://pixabay.com/)
+- Covid-19 api [covid19](https://covid19api.com/)
 
 #### scripts
 
