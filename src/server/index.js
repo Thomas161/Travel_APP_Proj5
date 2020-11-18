@@ -1,4 +1,7 @@
-// const path = require("path");
+import { getCityDetail } from "../client/js/api/geonamesAPI";
+import { getWeatherDetail } from "../client/js/api/weatherbitAPI";
+import { getImageDetail } from "../client/js/api/pixabayAPI";
+
 process.binding(
   "http_parser"
 ).HTTPParser = require("http-parser-js").HTTPParser;
@@ -29,66 +32,6 @@ app.get("/test", (req, res) => {
 app.listen(8080, () => {
   console.log(`Listening on 8080`);
 });
-
-//send request to geoname server
-const getCityDetail = async (key, city) => {
-  console.log("defined city", city);
-  try {
-    const request = await fetch(
-      `    http://api.geonames.org/searchJSON?username=${key}&name=${city}&maxRows=2`
-    );
-    console.log("Request from fetched api =>", request);
-
-    const res = await request.json();
-    console.log("Response back from geonames", res);
-    let trip = {};
-    trip.city = city;
-    trip.country = res.geonames[0].countryName;
-    trip.population = res.geonames[0].lng;
-    trip.longitude = res.geonames[0].lng;
-    trip.latitude = res.geonames[0].lat;
-    return trip;
-  } catch (err) {
-    console.log("Errors fetching geonames api", err);
-  }
-};
-
-const getWeatherDetail = async (city, date, key) => {
-  try {
-    const request = await fetch(
-      `https://api.weatherbit.io/v2.0/forecast/daily?city=${city}&key=${key}`
-    );
-    console.log("request", request);
-    const res = await request.json();
-    console.log("Response back requesting info from weatherbit", res);
-    let trip = {};
-    trip.temp = res.data.filter((t) => t.valid_date == date)[0].temp;
-    trip.description = res.data.filter(
-      (d) => d.valid_date == date
-    )[0].weather.description;
-    trip.icon = res.data.filter((i) => i.valid_date == date)[0].weather.icon;
-    return trip;
-  } catch (err) {
-    console.log("Errors fetching weatherbit api", err);
-  }
-};
-const getImageDetail = async (city, key) => {
-  try {
-    const request = await fetch(
-      `https://pixabay.com/api/?key=${key}&q=${city}&category=travel`
-    );
-    console.log("request", request);
-    const res = await request.json();
-    console.log("Response back requesting info from geonames", res);
-    let trip = {};
-
-    trip.photo = res.hits[0].previewURL;
-
-    return trip;
-  } catch (err) {
-    console.log("Errors fetching pixabay api", err);
-  }
-};
 
 app.post("/tripInfo", async (req, res) => {
   try {

@@ -11,9 +11,10 @@
 
 .tripInfoForm {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  margin: 5px;
+  left: 0;
+  width: 50%;
+  height: 90%;
 }
 .inputSearch,
 .inputDate {
@@ -22,8 +23,16 @@
 
 .inputSubmit {
   color: white;
-  background: red;
+  background: dodgerblue;
+  font-size: 11px;
 }
 .inputSubmit:hover {
   cursor: pointer;
+}
+#navbarItem {
+  position: absolute;
+  width: 50%;
+  background: lavender;
+  right: 0;
+  height: 100%;
 }
