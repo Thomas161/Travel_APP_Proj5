@@ -36,3 +36,15 @@
   right: 0;
   height: 100%;
 }
+#ulCovid {
+  position: absolute;
+  background-color: green;
+  border-radius: 12px;
+  width: auto;
+  height: 72px;
+}
+#covidLi {
+  list-style-type: none;
+  color: #f4f4f4;
+  font-size: 12px;
+}

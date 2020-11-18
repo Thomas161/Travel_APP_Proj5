@@ -1,6 +1,7 @@
 import { getCityDetail } from "../client/js/api/geonamesAPI";
 import { getWeatherDetail } from "../client/js/api/weatherbitAPI";
 import { getImageDetail } from "../client/js/api/pixabayAPI";
+import { getCovidData } from "../client/js/api/covid19API";
 
 process.binding(
   "http_parser"
@@ -41,11 +42,13 @@ app.post("/tripInfo", async (req, res) => {
     let trip = await getCityDetail(GEONAMES_USER, city);
     let trip2 = await getWeatherDetail(city, date, WEATHER_KEY);
     let trip3 = await getImageDetail(city, PIXABAY_KEY);
+    let covid19 = await getCovidData();
 
     res.json({
       trip: trip,
       trip2: trip2,
       trip3: trip3,
+      covid19,
       errorMessage: new Error("Something went wrong"),
     });
   } catch (err) {

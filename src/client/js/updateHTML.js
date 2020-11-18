@@ -41,6 +41,7 @@ export const updateUI = (journey, date, diffDays) => {
       // containerButton.style.display = "none";
       let ulList = document.getElementById("list");
       var liItem = document.createElement("li");
+      liItem.setAttribute("id", "tripListItem");
       ulList.appendChild(liItem).textContent = d.innerHTML;
       localStorage.setItem("city", d.innerHTML);
       let button = document.createElement("button");

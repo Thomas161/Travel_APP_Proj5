@@ -42,8 +42,36 @@
             />
           </form>
           <nav id="navbarItem">
-            <p>Hello</p>
+            <ul
+              id="ulCovid"
+              onclick="document,getElementById('id01').style.display = 'block'"
+            >
+              <li id="covidLi">
+                COVID-19<img
+                  src="../assets/sars-cov-19.jpg"
+                  alt="covid_image"
+                />
+              </li>
+            </ul>
           </nav>
+          <div id="id01" class="w3-modal">
+            <div class="w3-modal-content w3-card-4">
+              <header class="w3-container w3-teal">
+                <span
+                  onclick="document.getElementById('id01').style.display='none'"
+                  class="w3-button w3-display-topright"
+                  >&times;</span
+                >
+                <h2>COVID-19 DATA Australia</h2>
+              </header>
+              <div class="w3-container">
+                <p id="cases"></p>
+              </div>
+              <footer class="w3-container w3-teal">
+                <p>COVID-19 API<a href="https://covid19api.com"></a>/</p>
+              </footer>
+            </div>
+          </div>
         </section>
       </div>
       <div class="vert third">
