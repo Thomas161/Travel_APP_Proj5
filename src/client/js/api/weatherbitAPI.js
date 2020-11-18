@@ -1,5 +1,6 @@
+const fetch = require("node-fetch");
 //get weatherbit data
-export const getWeatherDetail = async (city, date, key) => {
+const getWeatherDetail = async (city, date, key) => {
   try {
     const request = await fetch(
       `https://api.weatherbit.io/v2.0/forecast/daily?city=${city}&key=${key}`
@@ -18,3 +19,5 @@ export const getWeatherDetail = async (city, date, key) => {
     console.log("Errors fetching weatherbit api", err);
   }
 };
+
+module.exports = { getWeatherDetail };

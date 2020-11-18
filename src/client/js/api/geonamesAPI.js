@@ -1,5 +1,6 @@
+const fetch = require("node-fetch");
 //send request to geoname server
-export const getCityDetail = async (key, city) => {
+const getCityDetail = async (key, city) => {
   console.log("defined city", city);
   try {
     const request = await fetch(
@@ -20,3 +21,4 @@ export const getCityDetail = async (key, city) => {
     console.log("Errors fetching geonames api", err);
   }
 };
+module.exports = { getCityDetail };

@@ -1,7 +1,7 @@
-import { getCityDetail } from "../client/js/api/geonamesAPI";
-import { getWeatherDetail } from "../client/js/api/weatherbitAPI";
-import { getImageDetail } from "../client/js/api/pixabayAPI";
-import { getCovidData } from "../client/js/api/covid19API";
+const place = require("../client/js/api/geonamesAPI");
+const weather = require("../client/js/api/weatherbitAPI");
+const pix = require("../client/js/api/pixabayAPI");
+const covid = require("../client/js/api/covid19API");
 
 process.binding(
   "http_parser"
@@ -39,16 +39,20 @@ app.post("/tripInfo", async (req, res) => {
     const city = req.body.city;
     const date = req.body.date;
     console.log("City in endpoint", city);
-    let trip = await getCityDetail(GEONAMES_USER, city);
-    let trip2 = await getWeatherDetail(city, date, WEATHER_KEY);
-    let trip3 = await getImageDetail(city, PIXABAY_KEY);
-    let covid19 = await getCovidData();
+    let location = place.getCityDetail(GEONAMES_USER, city);
+    let trip = await location;
+    let mother = weather.getWeatherDetail(city, date, WEATHER_KEY);
+    let trip2 = await mother;
+    let im = pix.getImageDetail(city, PIXABAY_KEY);
+    let trip3 = await im;
+    let disease = covid.getCovidData();
+    let covid19 = await disease;
 
     res.json({
       trip: trip,
       trip2: trip2,
       trip3: trip3,
-      covid19,
+      covid19: covid19,
       errorMessage: new Error("Something went wrong"),
     });
   } catch (err) {

@@ -1,5 +1,6 @@
+const fetch = require("node-fetch");
 //get pixabay data
-export const getImageDetail = async (city, key) => {
+const getImageDetail = async (city, key) => {
   try {
     const request = await fetch(
       `https://pixabay.com/api/?key=${key}&q=${city}&category=travel`
@@ -16,3 +17,4 @@ export const getImageDetail = async (city, key) => {
     console.log("Errors fetching pixabay api", err);
   }
 };
+module.exports = { getImageDetail };
